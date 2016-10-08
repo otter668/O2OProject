@@ -2,12 +2,14 @@
 #include "DataProvider.h"
 #include "UserList.h"
 #include "GroupList.h"
-#include "Activity.h"
+#include "ActivityList.h"
+#include "AppointmentList.h"
 
 DataProvider::DataProvider(void)
 {
 	userList = new UserList();
 	groupList = new GroupList(10);
+	appointmentList = new AppointmentList(10);
 }
 
 
@@ -17,6 +19,16 @@ DataProvider::~DataProvider(void)
 	{
 		delete userList;
 		userList = nullptr;
+	}
+	if (groupList!=nullptr)
+	{
+		delete groupList;
+		groupList = nullptr;
+	}
+	if (appointmentList!=nullptr)
+	{
+		delete appointmentList;
+		appointmentList = nullptr;
 	}
 }
 
@@ -89,7 +101,7 @@ void DataProvider::showAllGroup() const
 		}
 }
 
-bool DataProvider::showMyGroup(User* user) const
+bool DataProvider::showMyGroup(const User* user) const
 {
 		bool flag = false;
 		for (int i=0; i!=groupList->size(); i++)
@@ -129,6 +141,53 @@ bool DataProvider::joinActivity(User* user, string groupName, string activityNam
 	Activity* activity = group->getGroupActivitys()->at(aIndex);
 	activity->addUserToActivity(user);
 	return true;
+}
+
+bool DataProvider::AddAppointment(User* user, Appointment* app)
+{
+	if (appointmentList->contain(app->getId()))
+	{
+		cout << "此编号已存在或被其他私教占用，请换个编号" << endl;
+		return false;
+	}
+	app->addUserToAppointment(user);
+	appointmentList->addAppointment(app);
+	return true;
+}
+
+bool DataProvider::joinAppointment(User* user, string id)
+{
+	for (int i=0;i!=appointmentList->size();i++)
+	{
+		Appointment* app = appointmentList->at(i+1);
+		if (app->getId() == id)
+		{
+			app->addUserToAppointment(user);
+			return true;
+		}
+	}
+	return false;
+}
+
+void DataProvider::getAppointment(const User* user)
+{
+	for (int i=0;i!=appointmentList->size();i++)
+	{
+		Appointment *app = appointmentList->at(i+1);
+		if (app->getUserList()->contain(user->getName()))
+		{
+			app->showAppointmentInfo(user);
+		}
+	}
+}
+
+int DataProvider::showAllAppointment(const User* user) const
+{
+	for (int i=0;i!=appointmentList->size();i++)
+	{
+		appointmentList->at(i+1)->showAppointmentInfo(user);
+	}
+	return appointmentList->size();
 }
 
 bool DataProvider::addActivity(User* user, string groupName, Activity* activity)

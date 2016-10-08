@@ -22,11 +22,6 @@ ActivityList::~ActivityList(void)
 	}
 }
 
-Activity* ActivityList::at(int index) const
-{
-	return &activitys[index-1];
-}
-
 const int ActivityList::contain(string name) const
 {
 	for (int i=0;i!=length;i++)
@@ -41,7 +36,7 @@ const int ActivityList::contain(string name) const
 
 void ActivityList::addActivity(Activity* activity)
 {
-if (!contain(activity->getActivityName()))
+	if (!contain(activity->getActivityName()))
 	{
 		int index = length == capacity ? resize(),length++ : length++;
 		activitys[index] = *activity;

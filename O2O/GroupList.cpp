@@ -22,11 +22,6 @@ GroupList::~GroupList(void)
 	}
 }
 
-Groups* GroupList::at(int index) const
-{
-	return &groups[index-1];
-}
-
 const int GroupList::contain(string name) const
 {
 	for (int i=0;i!=length;i++)

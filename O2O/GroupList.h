@@ -10,7 +10,7 @@ public:
 	// 获取数组长度
 	inline int size(){return length;}
 	// 获取指定位置元素
-	Groups* at(int) const;
+	inline Groups* at(int index) const {return &groups[index-1];}
 	// 是否包含指定名称元素，并返回其位置[0,length]
 	const int contain(string) const;
 	// 添加新群组

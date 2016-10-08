@@ -13,7 +13,7 @@ public:
 protected:
 	virtual void showMenu();
 private:
-	void addActivity();
-	void getActivity() const;
+	void addAppointment();
+	void getAppointment() const;
 };
 

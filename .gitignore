@@ -31,3 +31,5 @@
 O2O/O2O.vcxproj
 O2O/O2O.vcxproj.filters
 O2O/O2O.vcxproj.user
+*.log
+*.ipch

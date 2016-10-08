@@ -16,7 +16,7 @@ private:
 	void showAllGroup() const;
 	void joinGroup();
 	void joinActivity();
-	void appointmentCoache(Member* param1);
-	void getActivityForCoache(Member* param1);
+	void appointmentCoache(User*);
+	void getAppointment(const User*);
 };
 

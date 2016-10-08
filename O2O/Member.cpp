@@ -24,7 +24,7 @@ void Member::selectItem()
 		case 2: joinGroup();break;
 		case 3: joinActivity();break;
 		case 4: appointmentCoache(this);break;
-		case 5: getActivityForCoache(this);break;
+		case 5: getAppointment(this);break;
 		case 6: return ;
 		default: cout << "无效操作！请重新选择。\n";PAUSE;
 		}
@@ -94,12 +94,30 @@ void Member::joinActivity()
 	}
 }
 
-void Member::appointmentCoache(Member* param1)
+void Member::appointmentCoache(User* user)
 {
-	throw std::logic_error("The method or operation is not implemented.");
+	cout << "编号\t时长\t开始时间\t结束时间\t价格\n";
+	int count = dp->showAllAppointment(user);
+	if (!count)
+	{
+		cout << "暂无数据！" << endl;
+		return;
+	}
+	string id;
+	cout << "请输入预约编号：";
+	cin >> id;
+	if(dp->joinAppointment(user, id))
+	{
+		cout << "预约成功！" << endl;
+	}
+	else
+	{
+		cout << "预约失败！" << endl;
+	}
 }
 
-void Member::getActivityForCoache(Member* param1)
+void Member::getAppointment(const User* user)
 {
-	throw std::logic_error("The method or operation is not implemented.");
+	cout << "编号\t时长\t开始时间\t结束时间\t价格\n";
+	dp->getAppointment(user);
 }
