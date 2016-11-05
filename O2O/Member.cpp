@@ -97,8 +97,7 @@ void Member::joinActivity()
 void Member::appointmentCoache(User* user)
 {
 	cout << "编号\t时长\t开始时间\t结束时间\t价格\n";
-	int count = dp->showAllAppointment(user);
-	if (!count)
+	if (!dp->showAllAppointment(user))
 	{
 		cout << "暂无数据！" << endl;
 		return;

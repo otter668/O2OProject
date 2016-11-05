@@ -76,7 +76,6 @@ bool DataProvider::addGroup(User* user, string name) const
 
 bool DataProvider::joinGrop(User* user, string name) const
 {
-	int index = groupList->contain(name);
 	if (groupList->contain(name))
 	{
 		groupList->addUserToGroup(user, name);
